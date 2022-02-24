@@ -1,0 +1,8 @@
+name: PlayerRevive
+version: '${project.version}'
+main: me.ogali.playerrevive.PlayerRevive
+api-version: 1.16
+Author: OG_Ali
+commands:
+  playerrevive:
+    aliases: pr
