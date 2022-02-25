@@ -13,33 +13,33 @@ import org.bukkit.potion.PotionEffectType;
 
 public class DeathEvent implements Listener {
 
-    private final PlayerRevive m;
+    private final PlayerRevive main;
 
     public DeathEvent(PlayerRevive m) {
-        this.m = m;
+        this.main = m;
     }
 
     @EventHandler
     public void onDeath(EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Player && m.getReviveTimerHandler().waitingForRevival((Player) e.getDamager())) {
+        if (e.getDamager() instanceof Player && main.getReviveTimerHandler().waitingForRevival((Player) e.getDamager())) {
             e.setCancelled(true);
         }
         if (!(e.getEntity() instanceof Player)) return;
 
-        Player p = (Player) e.getEntity();
+        Player player = (Player) e.getEntity();
 
-        if (m.getReviveTimerHandler().waitingForRevival(p)) {
-            m.getReviveTimerHandler().killPlayer(p);
+        if (main.getReviveTimerHandler().waitingForRevival(player)) {
+            main.getReviveTimerHandler().killPlayer(player);
             return;
         }
-        if (!(p.getHealth() - e.getDamage() < 1)) return;
+        if (!(player.getHealth() - e.getDamage() < 1)) return;
 
         e.setCancelled(true);
-        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10f, 1f);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1));
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10f, 1f);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1));
 
-        Chat.tell(p, "&cYou have been killed!\n&7*Your allies have 1 minute to revive you!");
-        ReviveTimer rt = new ReviveTimer(m, p);
+        Chat.tell(player, "&cYou have been killed!\n&7*Your allies have 1 minute to revive you!");
+        ReviveTimer rt = new ReviveTimer(main, player);
         rt.start();
     }
 

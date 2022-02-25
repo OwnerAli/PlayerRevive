@@ -8,21 +8,21 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class FreezeEvent implements Listener {
 
-    private final PlayerRevive m;
+    private final PlayerRevive main;
 
     public FreezeEvent(PlayerRevive m) {
-        this.m = m;
+        this.main = m;
     }
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
-        if (!m.getReviveTimerHandler().waitingForRevival(e.getPlayer())) return;
+        if (!main.getReviveTimerHandler().waitingForRevival(e.getPlayer())) return;
         e.setCancelled(true);
     }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if (!m.getReviveTimerHandler().waitingForRevival(e.getPlayer())) return;
+        if (!main.getReviveTimerHandler().waitingForRevival(e.getPlayer())) return;
         e.setCancelled(true);
     }
 

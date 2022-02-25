@@ -8,20 +8,19 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
 
 public class ReviveEvent implements Listener {
 
-    private final PlayerRevive m;
+    private final PlayerRevive main;
 
     public ReviveEvent(PlayerRevive m) {
-        this.m = m;
+        this.main = m;
     }
 
     @EventHandler
     public void onClick(PlayerInteractEntityEvent e) {
         if (!(e.getRightClicked() instanceof Player)) return;
-        if (!m.getReviveTimerHandler().waitingForRevival((Player) e.getRightClicked())) return;
+        if (!main.getReviveTimerHandler().waitingForRevival((Player) e.getRightClicked())) return;
         if (e.getPlayer().getInventory().getItemInMainHand().getType() != Material.GOLDEN_APPLE) return;
 
         ItemStack i = e.getPlayer().getInventory().getItemInMainHand();
@@ -35,7 +34,7 @@ public class ReviveEvent implements Listener {
         e.getPlayer().getInventory().getItemInMainHand().setAmount(amount - 1);
         Chat.tell(e.getPlayer(), "&aYou have successfully revived: &f" + deadPlayer.getName());
 
-        m.getReviveTimerHandler().revivePlayer(deadPlayer, e.getPlayer().getName());
+        main.getReviveTimerHandler().revivePlayer(deadPlayer, e.getPlayer().getName());
     }
 
 

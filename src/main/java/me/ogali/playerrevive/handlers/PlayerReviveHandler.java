@@ -10,19 +10,19 @@ import java.util.Map;
 
 public class PlayerReviveHandler {
 
-    private final Map<Player, ReviveTimer> timers = new HashMap<>();
+    private final Map<Player, ReviveTimer> timerMap = new HashMap<>();
 
     public void addReviveTimer(Player p, ReviveTimer timer) {
-        timers.put(p, timer);
+        timerMap.put(p, timer);
     }
 
     public void removeReviveTimer(Player p) {
-        timers.get(p).stop();
-        timers.remove(p);
+        timerMap.get(p).stop();
+        timerMap.remove(p);
     }
 
     public boolean waitingForRevival(Player p) {
-        return timers.get(p) != null;
+        return timerMap.get(p) != null;
     }
 
     public void killPlayer(Player p) {

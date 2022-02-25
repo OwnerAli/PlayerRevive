@@ -9,12 +9,10 @@ import java.util.Objects;
 
 public final class PlayerRevive extends JavaPlugin {
 
-    private static PlayerRevive instance;
     private PlayerReviveHandler playerReviveHandler;
 
     @Override
     public void onEnable() {
-        instance = this;
         registerEvents();
         registerCommands();
         registerHandlers();
@@ -34,10 +32,6 @@ public final class PlayerRevive extends JavaPlugin {
 
     public void registerHandlers() {
         playerReviveHandler = new PlayerReviveHandler();
-    }
-
-    public static PlayerRevive getInstance() {
-        return instance;
     }
 
     public PlayerReviveHandler getReviveTimerHandler() {
