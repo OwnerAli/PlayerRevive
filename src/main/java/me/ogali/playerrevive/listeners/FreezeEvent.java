@@ -16,13 +16,13 @@ public class FreezeEvent implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
-        if (!main.getReviveTimerHandler().waitingForRevival(e.getPlayer())) return;
+        if (!main.getPlayerReviveHandler().waitingForRevival(e.getPlayer())) return;
         e.setCancelled(true);
     }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if (!main.getReviveTimerHandler().waitingForRevival(e.getPlayer())) return;
+        if (!main.getPlayerReviveHandler().waitingForRevival(e.getPlayer())) return;
         e.setCancelled(true);
     }
 

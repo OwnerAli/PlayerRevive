@@ -21,15 +21,15 @@ public class DeathEvent implements Listener {
 
     @EventHandler
     public void onDeath(EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Player && main.getReviveTimerHandler().waitingForRevival((Player) e.getDamager())) {
+        if (e.getDamager() instanceof Player && main.getPlayerReviveHandler().waitingForRevival((Player) e.getDamager())) {
             e.setCancelled(true);
         }
         if (!(e.getEntity() instanceof Player)) return;
 
         Player player = (Player) e.getEntity();
 
-        if (main.getReviveTimerHandler().waitingForRevival(player)) {
-            main.getReviveTimerHandler().killPlayer(player);
+        if (main.getPlayerReviveHandler().waitingForRevival(player)) {
+            main.getPlayerReviveHandler().killPlayer(player);
             return;
         }
         if (!(player.getHealth() - e.getDamage() < 1)) return;
@@ -38,7 +38,7 @@ public class DeathEvent implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10f, 1f);
         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1));
 
-        Chat.tell(player, "&cYou have been killed!\n&7*Your allies have 1 minute to revive you!");
+        Chat.tell(player, "&cYou have been killed!\n&7* Your allies have 1 minute to revive you!");
         ReviveTimer rt = new ReviveTimer(main, player);
         rt.start();
     }

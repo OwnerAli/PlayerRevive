@@ -20,7 +20,7 @@ public class ReviveEvent implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEntityEvent e) {
         if (!(e.getRightClicked() instanceof Player)) return;
-        if (!main.getReviveTimerHandler().waitingForRevival((Player) e.getRightClicked())) return;
+        if (!main.getPlayerReviveHandler().waitingForRevival((Player) e.getRightClicked())) return;
         if (e.getPlayer().getInventory().getItemInMainHand().getType() != Material.GOLDEN_APPLE) return;
 
         ItemStack i = e.getPlayer().getInventory().getItemInMainHand();
@@ -34,7 +34,7 @@ public class ReviveEvent implements Listener {
         e.getPlayer().getInventory().getItemInMainHand().setAmount(amount - 1);
         Chat.tell(e.getPlayer(), "&aYou have successfully revived: &f" + deadPlayer.getName());
 
-        main.getReviveTimerHandler().revivePlayer(deadPlayer, e.getPlayer().getName());
+        main.getPlayerReviveHandler().revivePlayer(deadPlayer, e.getPlayer().getName());
     }
 
 

@@ -16,12 +16,13 @@ public class ReviveTimer extends BukkitRunnable {
 
     @Override
     public void run() {
-        main.getReviveTimerHandler().killPlayer(player);
+        main.getPlayerReviveHandler().killPlayer(player);
     }
 
     public void start() {
         this.runTaskTimer(main, 1200, 1L);
-        main.getReviveTimerHandler().addReviveTimer(player, this);
+        main.getPlayerReviveHandler().addReviveTimer(player, this);
+        main.getHologramHandler().createReviveHologram(player);
     }
 
     public void stop() {

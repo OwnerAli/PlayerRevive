@@ -1,8 +1,6 @@
 package me.ogali.playerrevive.commands;
 
-import me.ogali.playerrevive.PlayerRevive;
 import me.ogali.playerrevive.items.ReviveItem;
-import me.ogali.playerrevive.timers.ReviveTimer;
 import me.ogali.playerrevive.utils.Chat;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
@@ -19,12 +17,12 @@ public class MainCommand implements CommandExecutor {
         if (!(label.equalsIgnoreCase("playerrevive") || label.equalsIgnoreCase("pr"))) return false;
         if (!(sender instanceof Player)) return false;
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
         if (args.length >= 3) {
             if (!args[0].equalsIgnoreCase("give")) return false;
             if (Bukkit.getPlayer(args[1]) == null) {
-                Chat.tell(p, "&cInvalid or offline player.");
+                Chat.tell(player, "&cInvalid or offline player.");
                 return false;
             }
 
@@ -41,10 +39,10 @@ public class MainCommand implements CommandExecutor {
                 receiver.getInventory().addItem(reviveItem);
                 return false;
             } else {
-                Chat.tell(p, "&cUsage: /pr give (player) (amount)");
+                Chat.tell(player, "&cUsage: /pr give (player) (amount)");
             }
         } else {
-            Chat.tell(p, "&cUsage: /pr give (player) (amount)");
+            Chat.tell(player, "&cUsage: /pr give (player) (amount)");
         }
 
         return false;

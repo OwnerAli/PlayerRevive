@@ -1,5 +1,6 @@
 package me.ogali.playerrevive.handlers;
 
+import me.ogali.playerrevive.PlayerRevive;
 import me.ogali.playerrevive.timers.ReviveTimer;
 import me.ogali.playerrevive.utils.Chat;
 import org.bukkit.entity.Player;
@@ -28,10 +29,12 @@ public class PlayerReviveHandler {
     public void killPlayer(Player p) {
         p.setHealth(0.0D);
         removeReviveTimer(p);
+        PlayerRevive.getInstance().getHologramHandler().removeHologram(p);
     }
 
     public void revivePlayer(Player p, String reviver) {
         removeReviveTimer(p);
+        PlayerRevive.getInstance().getHologramHandler().removeHologram(p);
         Chat.tell(p, "&aYou have been revived by: &f" + reviver);
         p.removePotionEffect(PotionEffectType.BLINDNESS);
         p.setHealth(20.0D);

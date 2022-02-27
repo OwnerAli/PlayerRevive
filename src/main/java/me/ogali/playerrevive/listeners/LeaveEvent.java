@@ -15,8 +15,8 @@ public class LeaveEvent implements Listener {
 
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
-        if (!main.getReviveTimerHandler().waitingForRevival(e.getPlayer())) return;
-        main.getReviveTimerHandler().killPlayer(e.getPlayer());
+        if (!main.getPlayerReviveHandler().waitingForRevival(e.getPlayer())) return;
+        main.getPlayerReviveHandler().killPlayer(e.getPlayer());
     }
 
 }
